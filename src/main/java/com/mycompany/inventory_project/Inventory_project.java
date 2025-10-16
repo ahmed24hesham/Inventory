@@ -4,6 +4,8 @@
 
 package com.mycompany.inventory_project;
 
+import admin.EmployeeUser;
+
 /**
  *
  * @author Asus
@@ -11,6 +13,8 @@ package com.mycompany.inventory_project;
 public class Inventory_project {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+       
+        EmployeeUser e1=new EmployeeUser("E200","ahmed","ahmed@gmail.com","alex","012030646431");
+         System.out.println(e1.lineRepresentation());
     }
 }
