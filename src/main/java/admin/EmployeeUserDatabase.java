@@ -4,6 +4,9 @@ import admin.*;
 import employee.DataBase;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class EmployeeUserDatabase extends DataBase<EmployeeUser>{
     public EmployeeUserDatabase(String filename){
@@ -40,23 +43,53 @@ public class EmployeeUserDatabase extends DataBase<EmployeeUser>{
       }
       return null;
        }
-       public void deleteRecord(String key){
-           for(int i=0;i<records.size();i++){
-     if(records.get(i).getSearchKey().compareTo(key)==0){
-         records.remove(i);
-         return;
-     }
-      }
-           System.out.println("Not found");
-       }
-   
-       public void saveToFile() throws FileNotFoundException  {
-    PrintWriter pr = new PrintWriter(filename);
-    for (int i = 0; i < records.size(); i++) {
-        pr.println(records.get(i).lineRepresentation());
-    }
-    pr.close();
-}
+     private boolean hasDeletions = false;
 
+public void deleteRecord(String key) {
+    for (int i = 0; i < records.size(); i++) {
+        if (records.get(i).getSearchKey().equals(key)) {
+            records.remove(i);
+            hasDeletions = true; 
+            System.out.println("Record deleted from memory: " + key);
+            return;
+        }
+    }
+    System.out.println("Record not found: " + key);
+}
+   
+  public void saveToFile() throws FileNotFoundException {
+    if (hasDeletions) {
+        try (PrintWriter pr = new PrintWriter(filename)) {
+            for (int i = 0; i < records.size(); i++) {
+                pr.println(records.get(i).lineRepresentation());
+            }
+        }
+        hasDeletions = false; 
+        System.out.println("File overwritten (deletions were detected)");
+    } else {
+      
+        ArrayList<String> existingRecords = new ArrayList<>();
+        try (Scanner scanner = new Scanner(new File(filename))) {
+            while (scanner.hasNextLine()) {
+                existingRecords.add(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            
+        }
+        try (PrintWriter pr = new PrintWriter(new FileWriter(filename, true))) {
+            int newRecordsCount = 0;
+            for (int i = 0; i < records.size(); i++) {
+                String recordLine = records.get(i).lineRepresentation();
+                if (!existingRecords.contains(recordLine)) {
+                    pr.println(recordLine);
+                    newRecordsCount++;
+                }
+            }
+            System.out.println("Appended " + newRecordsCount + " new records");
+        } catch (IOException e) {
+            throw new FileNotFoundException("Error writing to file: " + e.getMessage());
+        }
+    }
+}
        
 }

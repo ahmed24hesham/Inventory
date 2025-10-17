@@ -4,6 +4,7 @@
 
 package com.mycompany.inventory_project;
 
+import admin.AdminRole;
 import admin.EmployeeUser;
 import admin.EmployeeUserDatabase;
 import java.io.IOException;
@@ -25,13 +26,22 @@ public class Inventory_project {
          System.out.println(c);
          EmployeeUser e2=b.createRecordFrom("E4000,Ahmed,ahmed_1999@gmail.com,Alexandria,01088877345");
          EmployeeUser e3=b.createRecordFrom("E3,Ahmed,ahmed_1999@gmail.com,Alexandria,01088877345");
-          ArrayList<EmployeeUser> records = b.returnAllRecords();
-          System.out.println(b.contains("E1400"));
-          System.out.println(b.contains("E1000"));
-          b.insertRecord(e2);
-          b.insertRecord(e3);
-          b.saveToFile();
-                  
-         
+//          ArrayList<EmployeeUser> records = b.returnAllRecords();
+//          System.out.println(b.contains("E1400"));
+//          System.out.println(b.contains("E1000"));
+//          b.insertRecord(e2);
+//          b.insertRecord(e3);
+//          b.saveToFile();
+          AdminRole ad=new AdminRole();
+//               b.deleteRecord("E1000");
+
+
+              
+//                b.saveToFile();
+                  ad.addEmployee("E4000","Ahmed","ahmed_1999@gmail.com","Alexandria","01088877345");
+                  ad.removeEmployee("E4000");
+                 
+
+//         ad.removeEmployee("E11000");
     }
 }
