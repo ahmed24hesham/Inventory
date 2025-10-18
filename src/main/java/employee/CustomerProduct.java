@@ -10,8 +10,12 @@ public class CustomerProduct extends Base  {
     private boolean paid;
     
     public CustomerProduct(String customerSSN, String productID, LocalDate purchaseDate){
+        if ((productID.charAt(0)=='P'||productID.charAt(0)=='p')&&checker(productID)){
+            this.productID = productID;
+        }else {
+            System.out.println("Input Error");
+        }
         this.customerSSN = customerSSN;
-        this.productID = productID;
         this.purchaseDate = purchaseDate;
         this.paid = false;   
     }
@@ -38,7 +42,7 @@ public class CustomerProduct extends Base  {
     @Override
     public String lineRepresentation(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return this.customerSSN + ',' + this.getCustomerSSN() + ',' + this.purchaseDate.format(formatter) + "," + this.paid ;
+        return this.customerSSN + ',' + this.productID+ ',' + this.purchaseDate.format(formatter) + "," + this.paid ;
     }
     @Override
      public String getSearchKey() {

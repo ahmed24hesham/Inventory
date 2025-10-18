@@ -9,6 +9,7 @@ import admin.EmployeeUser;
 import admin.EmployeeUserDatabase;
 import java.io.IOException;
 import employee.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -21,10 +22,35 @@ public class Inventory_project {
        
 //        EmployeeUser e1=new EmployeeUser("E11000","ahmed","ahmed@gmail.com","alex","01203064643");
 //         System.out.println(e1.lineRepresentation());
-        Product p1 = new Product("P2394","Laptop","Apple","TechSupplier",10,1500);
-        Product p2 = new Product("P23453","mobile","Apple","TechSupplier",10,1500);
-        Product p3 = new Product("P23455","mobile","Apple","TechSupplier",11,1500);
+//        Product p1 = new Product("P2394","Laptop","Apple","TechSupplier",10,1500);
+//        Product p2 = new Product("P23453","mobile","Apple","TechSupplier",10,1500);
+//        Product p3 = new Product("P23455","mobile","Apple","TechSupplier",11,1500);
         ProductDatabase pb = new ProductDatabase("data/Products.txt");
+        
+        CustomerProductDatabase dp = new CustomerProductDatabase("data/CustomersProducts.txt");
+        
+        CustomerProduct pp1 = new  CustomerProduct("111222333", "P2444", LocalDate.of(2005,4,22));
+        CustomerProduct pp2 = new  CustomerProduct("1222223333", "e2394", LocalDate.of(2005,4,24));
+        pp1.setPaid(true);
+        pp2.setPaid(false);
+        
+        
+        System.out.println(pp1.lineRepresentation());
+        System.out.println(pp2.lineRepresentation());
+        dp.insertRecord(pp1);
+        dp.insertRecord(pp2);
+        boolean c= dp.contains("111222333,P2444,22-04-2005");
+        boolean k= dp.contains("1222223333,e2394,24-04-2005");
+        System.out.println(c);
+        System.out.println(k);
+        dp.saveToFile();
+//        dp.deleteRecord("111222333,P2444,22-04-2005");
+//        c= dp.contains("111222333,P2444,22-04-2005");
+//        System.out.println(c);
+//        dp.saveToFile();
+
+        
+        
         
 //        EmployeeUserDatabase b = new EmployeeUserDatabase("data/Employee.txt");
 //          b.readFromFile();
@@ -42,12 +68,12 @@ public class Inventory_project {
 //          ad.addEmployee("E11000","ahmed","ahmed@gmail.com","alex","01203064643");
 //          ad.addEmployee("E12000","ahmed","ahmed@gmail.com","alex","01203064643");
 //          ad.removeEmployee("E11000");
-        pb.insertRecord(p1);
-        pb.saveToFile();
-                pb.insertRecord(p2);
-        pb.saveToFile();
-                        pb.insertRecord(p3);
-        pb.saveToFile();
+//        pb.insertRecord(p1);
+//        pb.saveToFile();
+//                pb.insertRecord(p2);
+//        pb.saveToFile();
+//                        pb.insertRecord(p3);
+//        pb.saveToFile();
 
 //               pb.deleteRecord("P23453");
 //               pb.saveToFile();
