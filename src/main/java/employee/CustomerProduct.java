@@ -1,9 +1,9 @@
 package employee;
-
+import admin.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class CustomerProduct {
+public class CustomerProduct extends Base  {
     private String customerSSN;
     private String productID;
     private LocalDate purchaseDate;
@@ -35,11 +35,12 @@ public class CustomerProduct {
     public void setPaid(boolean paid){
         this.paid = paid ;
     }
+    @Override
     public String lineRepresentation(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return this.customerSSN + ',' + this.getCustomerSSN() + ',' + this.purchaseDate.format(formatter) + "," + this.paid ;
     }
-    
+    @Override
      public String getSearchKey() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return this.customerSSN + "," + this.productID + "," + this.purchaseDate.format(formatter);
