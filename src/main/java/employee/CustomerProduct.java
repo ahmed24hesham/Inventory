@@ -28,6 +28,13 @@ public class CustomerProduct {
         return this.purchaseDate;
     }
     
+    public boolean isPaid (){
+        return this.paid ;
+    }
+    
+    public void setPaid(boolean paid){
+        this.paid = paid ;
+    }
     public String lineRepresentation(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return this.customerSSN + ',' + this.getCustomerSSN() + ',' + this.purchaseDate.format(formatter) + "," + this.paid ;
