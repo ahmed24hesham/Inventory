@@ -36,14 +36,16 @@ public class Inventory_project {
         
         
         System.out.println(pp1.lineRepresentation());
-        System.out.println(pp2.lineRepresentation());
+//        System.out.println(pp2.lineRepresentation());
+        System.out.println("ffffff");
         dp.insertRecord(pp1);
+                dp.saveToFile();
+
         dp.insertRecord(pp2);
         boolean c= dp.contains("111222333,P2444,22-04-2005");
         boolean k= dp.contains("1222223333,e2394,24-04-2005");
         System.out.println(c);
         System.out.println(k);
-        dp.saveToFile();
 //        dp.deleteRecord("111222333,P2444,22-04-2005");
 //        c= dp.contains("111222333,P2444,22-04-2005");
 //        System.out.println(c);

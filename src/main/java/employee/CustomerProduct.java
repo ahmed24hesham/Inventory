@@ -14,6 +14,7 @@ public class CustomerProduct extends Base  {
             this.productID = productID;
         }else {
             System.out.println("Input Error");
+            return ;
         }
         this.customerSSN = customerSSN;
         this.purchaseDate = purchaseDate;
