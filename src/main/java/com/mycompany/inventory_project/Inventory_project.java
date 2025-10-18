@@ -18,8 +18,8 @@ public class Inventory_project {
 
     public static void main(String[] args) throws IOException {
        
-        EmployeeUser e1=new EmployeeUser("E7000","ahmed","ahmed@gmail.com","alex","012030646431");
-         System.out.println(e1.lineRepresentation());
+        EmployeeUser e1=new EmployeeUser("E11000","ahmed","ahmed@gmail.com","alex","01203064643");
+//         System.out.println(e1.lineRepresentation());
         EmployeeUserDatabase b = new EmployeeUserDatabase("data/Employee.txt");
           b.readFromFile();
 //         boolean c= b.contains("E118800");
@@ -32,12 +32,15 @@ public class Inventory_project {
 //          b.insertRecord(e2);
 //          b.insertRecord(e3);
 //          b.saveToFile();
-//          AdminRole ad=new AdminRole();
+          AdminRole ad=new AdminRole();
+          ad.addEmployee("E11000","ahmed","ahmed@gmail.com","alex","01203064643");
+          ad.addEmployee("E12000","ahmed","ahmed@gmail.com","alex","01203064643");
+          ad.removeEmployee("E11000");
 //        b.insertRecord(e1);
-//b.saveToFile();
+//        b.saveToFile();
 
-               b.deleteRecord("E3");
-               b.saveToFile();
+//               b.deleteRecord("E3");
+//               b.saveToFile();
                
 
 

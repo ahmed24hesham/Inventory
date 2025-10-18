@@ -1,6 +1,6 @@
 package employee;
-
-public class Product {
+import admin.*;
+public class Product extends Base {
 private String productID;
 private String productName;
 private String manufacturerName;

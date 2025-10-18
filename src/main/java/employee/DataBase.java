@@ -48,10 +48,12 @@ public abstract class DataBase<T extends Base>{
       return null;
        }
          public void insertRecord(T record) {
-             if(!contains(record.getSearchKey()))
+           if(record==null)
+               return;
+             if((record.getSearchKey())!=null &&!contains(record.getSearchKey()))
         records.add(record);
              else
-                 System.out.println("ID Already exist");
+                 System.out.println("INPUT ERROR");
     }
      private boolean hasDeletions = false;
 
