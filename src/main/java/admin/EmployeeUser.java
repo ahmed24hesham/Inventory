@@ -1,5 +1,5 @@
 package admin;
-public class EmployeeUser {
+public class EmployeeUser extends Base {
     private String employeeId;
     private String  Name;
     private String  Email;
@@ -12,11 +12,13 @@ public class EmployeeUser {
                 this.Address=address;
                 this.PhoneNumber=phoneNumber;
        }
+    @Override
         public String lineRepresentation(){
             String employee;
           employee=this.employeeId + "," + this.Name +"," +this.Email +"," +this.Address +","+this.PhoneNumber;
           return employee;
         }
+    @Override
         public String getSearchKey(){
             return this.employeeId;
         }
