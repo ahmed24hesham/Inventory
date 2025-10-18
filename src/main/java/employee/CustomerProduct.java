@@ -13,7 +13,7 @@ public class CustomerProduct {
         this.customerSSN = customerSSN;
         this.productID = productID;
         this.purchaseDate = purchaseDate;
-        this.paid = paid;   
+        this.paid = false;   
     }
     
     public String getCustomerSSN(){
