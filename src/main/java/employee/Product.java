@@ -22,6 +22,10 @@ private float price;
         this.manufacturerName = manufacturerName;
         this.supplierName = supplierName;     
     }
+
+    public float getPrice() {
+        return price;
+    }
     
     public int getQuantity(){
         return this.quantity;

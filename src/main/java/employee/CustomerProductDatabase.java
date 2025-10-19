@@ -27,5 +27,14 @@ public class CustomerProductDatabase extends DataBase<CustomerProduct> {
             return null;
         }
     }
+    @Override
+      public CustomerProduct getRecord(String key) {
+          
+         for(int i=0;i<records.size();i++){
+     if(records.get(i).getSearchKey().split(",")[1].compareTo(key)==0)
+         return records.get(i);
+      }
+      return null;
+       }
      }
 

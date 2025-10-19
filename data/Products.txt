@@ -1,4 +1,5 @@
 P2394,Laptop,Apple,TechSupplier,10,1500.0
 P23453,mobile,Apple,TechSupplier,10,1500.0
-P23454,mobile,Apple,TechSupplier,11,1500.0
 P23455,mobile,Apple,TechSupplier,11,1500.0
+p25,tablet,Apple,TechSupplier,15,2500.0
+P2444,tablet,Apple,TechSupplier,16,2500.0
