@@ -1,6 +1,7 @@
 package employee;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class EmployeeRole {
     private ProductDatabase productsDatabase;
     private CustomerProductDatabase customerProductDatabase;
@@ -9,6 +10,12 @@ public class EmployeeRole {
         customerProductDatabase = new CustomerProductDatabase("data/CustomersProducts.txt");
         productsDatabase.readFromFile();
         customerProductDatabase.readFromFile();
+    }
+    public void addProduct(String id, String name, String manufacturer, String supplier, int quantity) throws FileNotFoundException{
+                Product p=new Product(id,name,manufacturer,supplier,quantity,0);
+        productsDatabase.insertRecord(p);
+        productsDatabase.saveToFile();
+        System.out.println("Product added");
     }
 
     public void addProduct(String id, String name, String manufacturer, String supplier, int quantity,float price) throws FileNotFoundException{
@@ -33,37 +40,47 @@ public class EmployeeRole {
                 return cp;
     }
     public boolean purchaseProduct(String customerSSN, String productID , LocalDate purchaseDate) throws FileNotFoundException{
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        String s = purchaseDate.format(formatter);
      CustomerProduct cp1=new CustomerProduct(customerSSN,productID ,purchaseDate);
      Product pp=productsDatabase.getRecord(productID);
      if(pp==null){
    return false;
      }
+     if(customerProductDatabase.getRecord(cp1.getSearchKey())!=null)
+         return false;
           int quantity=pp.getQuantity();
      if (quantity==0||!pp.checker(productID)) {
-        System.out.println("Product not fount");
+//        System.out.println("Product not fount");
         return false;
     }
      else{
-         pp.setQuantity(--quantity);
-         productsDatabase.saveToFile();
-         customerProductDatabase.insertRecord(cp1);
+         quantity-=1;
+         pp.setQuantity(quantity);
+                  customerProductDatabase.insertRecord(cp1);
           customerProductDatabase.saveToFile();
+         productsDatabase.deleteRecord(pp.getSearchKey());
+         productsDatabase.insertRecord(pp);
+         productsDatabase.saveToFile();
+//         customerProductDatabase.insertRecord(cp1);
+//          customerProductDatabase.saveToFile();
              System.out.println("Purchase recorded successfully");
           return true;
      }
     }
     public double returnProduct(String customerSSN, String productID,LocalDate purchaseDate ,LocalDate returnDate) throws FileNotFoundException{
-        CustomerProduct cpp=customerProductDatabase.getRecord(productID);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        CustomerProduct cpp=customerProductDatabase.getRecord(customerSSN + "," + productID + "," + purchaseDate.format(formatter));
+        
         Product pp=productsDatabase.getRecord(productID);
         if(cpp==null)return-1;
         LocalDate expire=cpp.getPurchaseDate().plusWeeks(2);
-        if( (!returnDate.isBefore(purchaseDate) ) && (!returnDate.isAfter(expire))&&pp!=null&&cpp!=null){
+        if( (!returnDate.isBefore(purchaseDate) ) && (!returnDate.isAfter(expire))&&pp!=null){
             int quantity=pp.getQuantity();
             quantity++;
             pp.setQuantity(quantity);
             productsDatabase.deleteRecord(productID);
             productsDatabase.insertRecord(pp);
-       
             productsDatabase.saveToFile();
 //              productsDatabase.deleteRecord(productID);
             customerProductDatabase.deleteRecord(cpp.getSearchKey());

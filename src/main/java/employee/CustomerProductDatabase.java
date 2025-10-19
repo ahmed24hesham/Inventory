@@ -31,7 +31,7 @@ public class CustomerProductDatabase extends DataBase<CustomerProduct> {
       public CustomerProduct getRecord(String key) {
           
          for(int i=0;i<records.size();i++){
-     if(records.get(i).getSearchKey().split(",")[1].compareTo(key)==0)
+     if(records.get(i).getSearchKey().compareTo(key)==0)
          return records.get(i);
       }
       return null;
